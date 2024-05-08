@@ -10,37 +10,46 @@ document.getElementById('generator-form').addEventListener('submit', function(ev
 });
 
 function generateWebsite(siteName, author, jsFolder, cssFolder) {
-  // Make an AJAX request to your Node.js server to generate the website skeleton and return it as a zip file
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/generate-website', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  const formData = {
+    siteName: siteName,
+    author: author,
+    jsFolder: jsFolder,
+    cssFolder: cssFolder
+  };
 
-  xhr.responseType = 'blob';
-
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      const blob = new Blob([xhr.response], { type: 'application/zip' });
-      const url = window.URL.createObjectURL(blob);
-      
-      // Create a temporary link element to trigger the download
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `${siteName}.zip`;
-      document.body.appendChild(link);
-      link.click();
-
-      // Cleanup
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(link);
+  fetch('http://localhost:3000/generate-website', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (response.ok) {
+      // Successful response, initiate download
+      return response.blob();
     } else {
-      console.error('Failed to generate website:', xhr.statusText);
+      // Handle error
+      throw new Error('Failed to generate website: ' + response.statusText);
     }
-  };
+  })
+  .then(blob => {
+    // Create a temporary URL for the blob
+    const url = window.URL.createObjectURL(blob);
+    
+    // Create a temporary link element to trigger the download
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${siteName}.zip`;
+    document.body.appendChild(link);
+    link.click();
 
-  xhr.onerror = function() {
-    console.error('Network error occurred');
-  };
-
-  const data = JSON.stringify({ siteName, author, jsFolder, cssFolder });
-  xhr.send(data);
+    // Cleanup
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+  })
+  .catch(error => {
+    console.error(error);
+    alert(error.message); // Display error message to the user
+  });
 }
