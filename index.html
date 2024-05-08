@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Website Generator</h1>
+    <form id="generator-form">
+      <label for="site-name">Enter the name of the website:</label>
+      <input type="text" id="site-name" name="site-name" required><br><br>
+
+      <label for="author">Enter the author of the website:</label>
+      <input type="text" id="author" name="author" required><br><br>
+
+      <label for="js-folder">Do you want a folder for JavaScript files?</label>
+      <input type="checkbox" id="js-folder" name="js-folder"><br><br>
+
+      <label for="css-folder">Do you want a folder for CSS files?</label>
+      <input type="checkbox" id="css-folder" name="css-folder"><br><br>
+
+      <button type="submit">Generate Website</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
