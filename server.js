@@ -39,9 +39,11 @@ const server = http.createServer((req, res) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${siteName}</title>
   <meta name="author" content="${author}">
+  ${cssFolder === 'y' ? '<link rel="stylesheet" href="css/style.css">' : ''}
 </head>
 <body>
   <h1>Welcome to ${siteName}</h1>
+  ${jsFolder === 'y' ? '<script src="js/script.js"></script>' : ''}
 </body>
 </html>
       `;
@@ -50,10 +52,12 @@ const server = http.createServer((req, res) => {
 
       if (jsFolder === 'y') {
         fs.mkdirSync(`${rootFolder}/js`);
+        fs.writeFileSync(`${rootFolder}/js/script.js`, '');
       }
 
       if (cssFolder === 'y') {
         fs.mkdirSync(`${rootFolder}/css`);
+        fs.writeFileSync(`${rootFolder}/css/style.css`, '');
       }
 
       // Create zip file
