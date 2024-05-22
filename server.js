@@ -2,16 +2,14 @@ const http = require('http');
 const fs = require('fs');
 const archiver = require('archiver');
 
-const port = 3000; // Change this to your desired port
+const port = 3000;
 
 const server = http.createServer((req, res) => {
-  // Allow requests from any origin
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); // Allow POST and OPTIONS requests
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); 
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); 
 
   if (req.method === 'OPTIONS') {
-    // Handle preflight request
     res.writeHead(200);
     res.end();
     return;
@@ -26,8 +24,6 @@ const server = http.createServer((req, res) => {
 
     req.on('end', () => {
       const { siteName, author, jsFolder, cssFolder } = JSON.parse(data);
-
-      // Generate website skeleton
       const rootFolder = `./${siteName}`;
       fs.mkdirSync(rootFolder);
 

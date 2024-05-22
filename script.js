@@ -26,10 +26,8 @@ function generateWebsite(siteName, author, jsFolder, cssFolder) {
   })
   .then(response => {
     if (response.ok) {
-      // Successful response, initiate download
       return response.blob();
     } else {
-      // Handle error
       throw new Error('Failed to generate website: ' + response.statusText);
     }
   })
@@ -44,12 +42,11 @@ function generateWebsite(siteName, author, jsFolder, cssFolder) {
     document.body.appendChild(link);
     link.click();
 
-    // Cleanup
     window.URL.revokeObjectURL(url);
     document.body.removeChild(link);
   })
   .catch(error => {
     console.error(error);
-    alert(error.message); // Display error message to the user
+    alert(error.message); 
   });
 }
