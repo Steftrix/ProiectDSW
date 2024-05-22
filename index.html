@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Website Generator</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="container">
-<h1>Generator de Website-uri</h1>
-<form id="generator-form">
-  <label for="site-name">Introdu numele website-ului:</label>
-  <input type="text" id="site-name" name="site-name" required><br><br>
-
-  <label for="author">Introdu numele autorului website-ului:</label>
-  <input type="text" id="author" name="author" required><br><br>
-
-  <label for="js-folder">Dorești un folder pentru fișierele JavaScript?</label>
-  <input type="checkbox" id="js-folder" name="js-folder"><br><br>
-
-  <label for="css-folder">Dorești un folder pentru fișierele CSS?</label>
-  <input type="checkbox" id="css-folder" name="css-folder"><br><br>
-
-  <button type="submit">Generează Website-ul</button>
-</form>
+    <header>
+      <h1>Generator de Website-uri</h1>
+      <p>Creeazăți un website nou în doar câteva clicuri!</p>
+    </header>
+    <form id="generator-form">
+      <div class="form-section">
+        <h2>Informații despre website</h2>
+        <div class="form-group">
+          <label for="site-name">Numele website-ului:</label>
+          <input type="text" id="site-name" name="site-name" required>
+        </div>
+        <div class="form-group">
+          <label for="author">Autorul website-ului:</label>
+          <input type="text" id="author" name="author" required>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Opțiuni de structură</h2>
+        <div class="form-group">
+          <label for="js-folder">Folder pentru fișierele JavaScript:</label>
+          <input type="checkbox" id="js-folder" name="js-folder">
+        </div>
+        <div class="form-group">
+          <label for="css-folder">Folder pentru fișierele CSS:</label>
+          <input type="checkbox" id="css-folder" name="css-folder">
+        </div>
+      </div>
+      <button type="submit" class="btn-submit">Generează Website-ul</button>
+    </form>
   </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>
